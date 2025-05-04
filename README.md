@@ -1,10 +1,9 @@
 
 
 <h1 style="text-align:center">
-Project : jeu de la Devinette
+ jeu de la Devinette
 </h1>
-
-[![GitHub license](https://img.shields.io/github/license/mubarak-mohamed/wordpress-dev)](https://github.com/zool-techno/guessing-game.git)
+[![GitHub license](https://img.shields.io/github/license/mmubarak-mohamed/guessing-game)](https://github.com/mubarak-mohamed/guessing-game.git)
 [![PyPI version](https://badge.fury.io/py/numpy.svg?icon=si%3Apython)](https://badge.fury.io/py/numpy)
 
 # Table of content
@@ -14,11 +13,12 @@ Project : jeu de la Devinette
 - [Citation](#Citation)
 - [Features](#Features)
 - [Licence](#licence)
-  
 
 # Overview
 
 The project under consideration implements a guessing game in which the computer attempts to discern an animal or object that the user is contemplating by posing yes/no questions. The implementation utilizes a decision tree to efficiently narrow down the possibilities.
+
+![Guessing Game Logo](dataset/output.png)
 
 # Installation
 
@@ -70,7 +70,7 @@ The dataset must be in CSV format with :
 | antelope    | 1    | 0        | 0    | 1    | 0        | 0      | 0        | 0    | 4    | 1    | 0        | 1       | 1    |
 | bass        | 0    | 0        | 1    | 0    | 0        | 1      | 0        | 1    | 0    | 1    | 0        | 0       | 4    |
 | bear        | 1    | 0        | 0    | 1    | 0        | 0      | 0        | 0    | 4    | 0    | 0        | 1       | 1    |
-| boar        | 1    | 0        | 0   
+| boar        | 1    | 0        | 0    | 1    | 0        | 0      | 0        | 0    | 1    | 0    | 0        | 1       | 1    |
 
 
 # Citation 
@@ -97,7 +97,7 @@ Potential improvements include:
 
 # Licence
 
-Ce projet est sous [MIT license](https://gitlab.com/mubarak-mohamed/guessing-game/-/blob/58271dc731aced70a640748f83b2752a0f4f90a1/LICENSE). Voir le fichier LICENSE pour plus de détails. 
+This project is under  [MIT license](https://gitlab.com/mubarak-mohamed/guessing-game/-/blob/58271dc731aced70a640748f83b2752a0f4f90a1/LICENSE). See the LICENSE file for more details. 
 
 [![Attribution-NonCommercial-ShareAlike](https://licensebuttons.net/i/l/by-nc-sa/ffffff/00/00/00/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/2.0/)
 

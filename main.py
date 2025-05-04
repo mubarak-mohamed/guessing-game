@@ -3,100 +3,99 @@
 """
 Created on Sun April 18 14:00:00 2025
 @author: Mubarak mohamed 
-Références :
+refrence :
 - UCI Machine Learning Repository: Zoo Data Set https://archive.ics.uci.edu/ml/datasets/zoo
-- Concepts d'entropie et d'information : https://fr.wikipedia.org/wiki/Entropie_(information)
-- ChatGPT pour l'aide à la rédaction du code et la compréhension des concepts
+- Entropy and Information Concepts : https://fr.wikipedia.org/wiki/Entropie_(information)
 """
 import pandas as pd
 from collections import OrderedDict
 
-# 1. Chargement des données
+# 1. Loading the data
 def charger_donnees():
-    """Charge le fichier zoo.csv et retourne le DataFrame."""
-    data = pd.read_csv("assets/zoo.csv")
+    """Loads the zoo.csv file and returns the DataFrame."""
+    data = pd.read_csv("dataset/zoo.csv")
     return data
 
 def afficher_apercu(data):
-    print("Aperçu des données :")
+    print("Data overview :")
     print(data.head())
 
 def obtenir_variables_binaires(data):
-    """Retourne la liste des variables binaires (hors 'legs', 'type', 'animal_name')."""
+    """Returns the list of binary variables (excluding “legs”, “type”, “animal_name”)."""
     return [col for col in data.columns if col not in ['animal_name', 'legs', 'type']]
 
-# 2. Fonction naïve de filtrage par questions successives
+# 2. Successive questions naive filter function
 def jeu_naif(data, binary_features):
-    print("\nPensez à un animal. Je vais poser des questions pour le deviner.")
+    print("\nAI. I'm going to ask some questions to find out.")
     candidats = data.copy()
     for feature in binary_features:
-        question = f"L'animal a-t-il la caractéristique '{feature}' ? (oui/non) : "
+        question = f"Does the animal have the characteristic '{feature}'? (yes/no): "
         while True:
             reponse = input(question).strip().lower()
-            if reponse == "oui":
+            if reponse == "yes":
                 candidats = candidats[candidats[feature] == 1]
                 break
-            elif reponse == "non":
+            elif reponse == "no":
                 candidats = candidats[candidats[feature] == 0]
                 break
             else:
-                print("Réponse invalide. Veuillez répondre par 'oui' ou 'non'.")
+                print("Invalid answer. Please answer 'yes' or 'no'.")
         if len(candidats) == 1:
-            print(f"Je pense que vous pensez à : {candidats.iloc[0]['animal_name']}")
+            print(f"I think you're thinking of : {candidats.iloc[0]['animal_name']}")
             return
         elif len(candidats) == 0:
-            print("Aucun animal ne correspond à vos réponses.")
+            print("No animals match your answers.")
             return
-    print("Plusieurs animaux correspondent à vos réponses :")
+    print("Your answers match several animals:")
     print(candidats['animal_name'].tolist())
 
-# 3. Arbre de décision manuel (extrait)
+# 3. Manual decision tree
 arbre_decision = OrderedDict({
-    "question": "A-t-il des cheveux ou des poils ?",
-    "oui": {
-        "question": "Pond-il des œufs ?",
-        "oui": {
-            "question": "Nourrit-il ses petits avec du lait ?",
-            "oui": {"devinette": "Ornithorynque"},
-            "non": {"devinette": "Échidné"}
+    "question": "Does it have hair ?",
+    "yes": {
+        "question": "Does it lay eggs ?",
+        "yes": {
+            "question": "Does it feed its young with milk ?",
+            "yes": {"devinette": "platypus"},
+            "no": {"devinette": "Echidna"}
         },
-        "non": {
-            "question": "Est-il carnivore ?",
-            "oui": {"devinette": "Chien"},
-            "non": {"devinette": "Vache"}
+        "no": {
+            "question": "Is it carnivorous ?",
+            "yes": {"devinette": "Dog"},
+            "no": {"devinette": "Cow"}
         }
     },
-    "non": {
-        "question": "A-t-il des plumes ?",
-        "oui": {"devinette": "Aigle"},
-        "non": {
-            "question": "Vit-il dans l'eau ?",
-            "oui": {"devinette": "Dauphin"},
-            "non": {"devinette": "Serpent"}
+    "no": {
+        "question": "Does it have feathers ?",
+        "yes": {"devinette": "Eagle"},
+        "no": {
+            "question": "Does it live in water?",
+            "yes": {"devinette": "Dolphin"},
+            "no": {"devinette": "skua"}
         }
     }
 })
 
 def jouer_devinette_arbre(noeud):
-    """Parcourt l'arbre de décision pour deviner l'animal."""
+    """Go through the decision tree to guess the animal."""
     if "devinette" in noeud:
-        print(f"Je crois que vous pensez à : {noeud['devinette']}")
+        print(f"I think you're thinking of : {noeud['devinette']}")
         return
     while True:
-        reponse = input(noeud["question"] + " (oui/non) : ").strip().lower()
+        reponse = input(noeud["question"] + " (yes/no) : ").strip().lower()
         if reponse in noeud:
             jouer_devinette_arbre(noeud[reponse])
             break
         else:
-            print("Réponse invalide. Veuillez répondre par 'oui' ou 'non'.")
+            print("Invalid answer. Please answer 'yes' or 'no'.")
 
-# 4. Menu principal
+# 4. Main menu
 def menu():
-    print("Bienvenue dans le jeu de la devinette !")
-    print("1. Méthode Naïve (questions successives)")
-    print("2. Méthode Arbre de décision")
-    print("3. Quitter")
-    choix = input("Choisissez une Option -> (1/2/3) : ").strip()
+    print(" Welcome to the guessing game !")
+    print("1. Naïve Method (successive questions)")
+    print("2. Decision tree Method")
+    print("3. Exit")
+    choix = input("Selection of option -> (1/2/3) : ").strip()
     return choix
 
 def main():
@@ -108,13 +107,13 @@ def main():
         if choix == "1":
             jeu_naif(data, binary_features)
         elif choix == "2":
-            print("\nPensez à un animal. Je vais essayer de le deviner.")
+            print("\nAI. I'll try to guess it.")
             jouer_devinette_arbre(arbre_decision)
         elif choix == "3":
-            print("Au revoir !")
+            print("Goodbye !")
             break
         else:
-            print("Choix invalide. Veuillez sélectionner 1, 2 ou 3.")
+            print("Not allowed to select. Please select -> 1, 2 ou 3.")
 
 if __name__ == "__main__":
     main()

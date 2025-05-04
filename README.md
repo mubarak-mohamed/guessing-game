@@ -1,10 +1,11 @@
 
+[![GitHub license](https://img.shields.io/github/license/mubarak-mohamed/guessing-game)](https://github.com/mubarak-mohamed/guessing-game.git)
+[![PyPI version](https://badge.fury.io/py/numpy.svg?icon=si%3Apython)](https://badge.fury.io/py/numpy)
+
 
 <h1 style="text-align:center">
  jeu de la Devinette
 </h1>
-[![GitHub license](https://img.shields.io/github/license/mmubarak-mohamed/guessing-game)](https://github.com/mubarak-mohamed/guessing-game.git)
-[![PyPI version](https://badge.fury.io/py/numpy.svg?icon=si%3Apython)](https://badge.fury.io/py/numpy)
 
 # Table of content
 - [Overview](#Overview)
